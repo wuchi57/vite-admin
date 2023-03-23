@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <router-link to="/" class="text-2xl">To Home</router-link>
+  <router-link to="/" class="text-2xl font-medium">To Home 前往主页</router-link>
   <h1>About</h1>
 </template>
 

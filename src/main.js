@@ -1,8 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import 'styles/global.sass'
+import 'normalize.css/normalize.css'
 import 'styles/tailwind.css'
 import 'styles/preflight.css'
+import 'styles/global.sass'
 import router from './router'
 import store from './store'
 
