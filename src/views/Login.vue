@@ -60,7 +60,7 @@ function handleLogin () {
 </script>
 
 <template>
-  <div class="w-full h-full py-40 flex justify-center">
+  <div class="login-page w-full h-full py-40 flex justify-center">
     <el-form ref="formRef" :model="loginForm" :rules="loginRules" class="w-[32rem] px-8">
       <h3 class="text-pr text-[1.625rem] text-center mb-8 font-semibold">Login Form</h3>
       <el-form-item prop="username">

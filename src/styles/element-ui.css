@@ -1,7 +1,10 @@
-.el-input /deep/ .el-input__wrapper:hover,
-.el-input /deep/ .el-input__wrapper.is-focus {
-    box-shadow: 0 0 0 1px var(--el-input-border-color,var(--el-border-color)) inset;
+/* 全局input border样式修改 */
+.el-input .el-input__wrapper:hover,
+.el-input .el-input__wrapper.is-focus {
+    box-shadow: 0 0 0 1px var(--el-input-border-color, var(--el-border-color)) inset;
 }
-.el-input /deep/ input {
+
+/* 登录页面input样式修改 */
+.login-page .el-input input {
     height: 2.9rem;
 }

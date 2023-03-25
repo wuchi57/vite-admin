@@ -55,7 +55,7 @@ export default defineConfig({
       "api": resolve(__dirname, "src/api"),
       "styles": resolve(__dirname, "src/styles"),
       "views": resolve(__dirname, "src/views"),
-      "layouts": resolve(__dirname, "src/layouts"),
+      "layout": resolve(__dirname, "src/layout"),
       "utils": resolve(__dirname, "src/utils"),
       "plugins": resolve(__dirname, "src/plugins"),
       "dirs": resolve(__dirname, "src/directives"),
