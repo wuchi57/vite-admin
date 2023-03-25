@@ -4,6 +4,7 @@ import ElementIcon from 'components/ElementIcon.vue'
 
 <template>
   <router-link to="/about" class="text-2xl font-medium">To About 前往关于页面</router-link>
+  <router-link to="/login" class="text-2xl font-medium">To Login 前往登录页面</router-link>
   <ElementIcon />
   <h1 class="text-red-700 text-3xl font-bold underline">
     Hello world!

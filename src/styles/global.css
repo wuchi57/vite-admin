@@ -9,6 +9,15 @@ body {
 
 #app {
     height: inherit;
-    display: grid;
-    place-items: center;
+}
+
+/* test color */
+.bd {
+    border: 1px solid orangered;
+}
+.bdg {
+    border: 1px solid limegreen;
+}
+.bdb {
+    border: 1px solid deepskyblue;
 }

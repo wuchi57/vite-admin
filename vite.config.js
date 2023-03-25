@@ -13,17 +13,17 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      imports:['vue', 'vue-router'],
+      imports: ['vue', 'vue-router'],
       dts: 'src/auto-import.d.ts',
       resolvers: [
         ElementPlusResolver(),
-        IconsResolver({prefix: 'Icon'},),
+        IconsResolver({ prefix: 'Icon' },),
       ],
     }),
     Components({
       resolvers: [
         ElementPlusResolver(),
-        IconsResolver({enabledCollections: ['ep'],}),
+        IconsResolver({ enabledCollections: ['ep'], }),
       ],
     }),
     Icons({
@@ -61,6 +61,7 @@ export default defineConfig({
       "dirs": resolve(__dirname, "src/directives"),
     },
   },
+  base: '/',
   server: {
     https: false,
     port: 3000,
@@ -68,7 +69,13 @@ export default defineConfig({
     host: '0.0.0.0',
     open: true,
     cors: true,
-    proxy: {},
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/api/, '') //stage
+      }
+    }
   },
   build: {
     // 设置最终构建的浏览器兼容目标
