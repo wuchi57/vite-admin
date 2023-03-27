@@ -1,72 +1,433 @@
-<script setup>
-import { Document, Location, Menu as IconMenu, Setting, } from '@element-plus/icons-vue'
-
-const router = useRouter()
-console.log(router.options.routes)
-const isCollapse = ref(false)
-
-function handleOpen (key, keyPath) {
-  console.log(key, keyPath)
-}
-
-function handleClose (key, keyPath) {
-  console.log(key, keyPath)
-}
-</script>
-
 <template>
-  <div>
-    <div>Navbar Logo</div>
-    <el-scrollbar>
-      <!--<el-menu>-->
-      <!--  <SidebarItem v-for="route in router.options.routes" :key="route.path" :item="route" :base-path="route.path"/>-->
-      <!--</el-menu>-->
+  <div :class="{ 'has-logo': showLogo }"
+       :style="{ backgroundColor: sideTheme === 'theme-dark' ? variables.menuBackground : variables.menuLightBackground }">
+    <logo v-if="showLogo" :collapse="isCollapse"/>
+    <el-scrollbar :class="sideTheme" wrap-class="scrollbar-wrapper">
       <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo"
+        :default-active="activeMenu"
         :collapse="isCollapse"
-        @open="handleOpen"
-        @close="handleClose"
+        :background-color="sideTheme === 'theme-dark' ? variables.menuBackground : variables.menuLightBackground"
+        :text-color="sideTheme === 'theme-dark' ? variables.menuColor : variables.menuLightColor"
+        :unique-opened="true"
+        :active-text-color="theme"
+        :collapse-transition="false"
+        mode="vertical"
       >
-        <el-sub-menu index="1">
-          <template #title>
-            <el-icon>
-              <location/>
-            </el-icon>
-            <span>Navigator One</span>
-          </template>
-          <el-menu-item-group>
-            <template #title><span>Group One</span></template>
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item two</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title><span>item four</span></template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
-        </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon>
-            <icon-menu/>
-          </el-icon>
-          <template #title>Navigator Two</template>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon>
-            <document/>
-          </el-icon>
-          <template #title>Navigator Three</template>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon>
-            <setting/>
-          </el-icon>
-          <template #title>Navigator Four</template>
-        </el-menu-item>
+        <sidebar-item
+          v-for="(route, index) in sidebarRouters"
+          :key="route.path + index"
+          :item="route"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
 </template>
+
+<script setup>
+import Logo from './Logo.vue'
+import SidebarItem from './SidebarItem.vue'
+import variables from '@/assets/styles/variables.module.scss'
+
+const route = useRoute();
+
+const sidebarRouters = ref(
+  [
+    {
+      "path": "/redirect",
+      "component": {
+        "__name": "index",
+        "__hmrId": "051739fd",
+        "__scopeId": "data-v-051739fd",
+        "__file": "/Users/wuchi/Projects/RuoYi-Vue3/src/layout/index.vue"
+      },
+      "hidden": true,
+      "children": [
+        {
+          "path": "/redirect/:path(.*)"
+        }
+      ]
+    },
+    {
+      "path": "/login",
+      "hidden": true
+    },
+    {
+      "path": "/register",
+      "hidden": true
+    },
+    {
+      "path": "/:pathMatch(.*)*",
+      "hidden": true
+    },
+    {
+      "path": "/401",
+      "hidden": true
+    },
+    {
+      "path": "",
+      "component": {
+        "__name": "index",
+        "__hmrId": "051739fd",
+        "__scopeId": "data-v-051739fd",
+        "__file": "/Users/wuchi/Projects/RuoYi-Vue3/src/layout/index.vue"
+      },
+      "redirect": "/index",
+      "children": [
+        {
+          "path": "/index",
+          "name": "Index",
+          "meta": {
+            "title": "首页",
+            "icon": "dashboard",
+            "affix": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "/user",
+      "component": {
+        "__name": "index",
+        "__hmrId": "051739fd",
+        "__scopeId": "data-v-051739fd",
+        "__file": "/Users/wuchi/Projects/RuoYi-Vue3/src/layout/index.vue"
+      },
+      "hidden": true,
+      "redirect": "noredirect",
+      "children": [
+        {
+          "path": "profile",
+          "name": "Profile",
+          "meta": {
+            "title": "个人中心",
+            "icon": "user"
+          }
+        }
+      ]
+    },
+    {
+      "name": "System",
+      "path": "/system",
+      "hidden": false,
+      "redirect": "noRedirect",
+      "component": {
+        "__name": "index",
+        "__hmrId": "051739fd",
+        "__scopeId": "data-v-051739fd",
+        "__file": "/Users/wuchi/Projects/RuoYi-Vue3/src/layout/index.vue"
+      },
+      "alwaysShow": true,
+      "meta": {
+        "title": "系统管理",
+        "icon": "system",
+        "noCache": false,
+        "link": null
+      },
+      "children": [
+        {
+          "name": "User",
+          "path": "user",
+          "hidden": false,
+          "meta": {
+            "title": "用户管理",
+            "icon": "user",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Role",
+          "path": "role",
+          "hidden": false,
+          "meta": {
+            "title": "角色管理",
+            "icon": "peoples",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Menu",
+          "path": "menu",
+          "hidden": false,
+          "meta": {
+            "title": "菜单管理",
+            "icon": "tree-table",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Dept",
+          "path": "dept",
+          "hidden": false,
+          "meta": {
+            "title": "部门管理",
+            "icon": "tree",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Post",
+          "path": "post",
+          "hidden": false,
+          "meta": {
+            "title": "岗位管理",
+            "icon": "post",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Dict",
+          "path": "dict",
+          "hidden": false,
+          "meta": {
+            "title": "字典管理",
+            "icon": "dict",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Config",
+          "path": "config",
+          "hidden": false,
+          "meta": {
+            "title": "参数设置",
+            "icon": "edit",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Notice",
+          "path": "notice",
+          "hidden": false,
+          "meta": {
+            "title": "通知公告",
+            "icon": "message",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Log",
+          "path": "log",
+          "hidden": false,
+          "redirect": "noRedirect",
+          "component": {
+            "__hmrId": "341491bb",
+            "__file": "/Users/wuchi/Projects/RuoYi-Vue3/src/components/ParentView/index.vue"
+          },
+          "alwaysShow": true,
+          "meta": {
+            "title": "日志管理",
+            "icon": "log",
+            "noCache": false,
+            "link": null
+          },
+          "children": [
+            {
+              "name": "Operlog",
+              "path": "operlog",
+              "hidden": false,
+              "meta": {
+                "title": "操作日志",
+                "icon": "form",
+                "noCache": false,
+                "link": null
+              }
+            },
+            {
+              "name": "Logininfor",
+              "path": "logininfor",
+              "hidden": false,
+              "meta": {
+                "title": "登录日志",
+                "icon": "logininfor",
+                "noCache": false,
+                "link": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Monitor",
+      "path": "/monitor",
+      "hidden": false,
+      "redirect": "noRedirect",
+      "component": {
+        "__name": "index",
+        "__hmrId": "051739fd",
+        "__scopeId": "data-v-051739fd",
+        "__file": "/Users/wuchi/Projects/RuoYi-Vue3/src/layout/index.vue"
+      },
+      "alwaysShow": true,
+      "meta": {
+        "title": "系统监控",
+        "icon": "monitor",
+        "noCache": false,
+        "link": null
+      },
+      "children": [
+        {
+          "name": "Online",
+          "path": "online",
+          "hidden": false,
+          "meta": {
+            "title": "在线用户",
+            "icon": "online",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Job",
+          "path": "job",
+          "hidden": false,
+          "meta": {
+            "title": "定时任务",
+            "icon": "job",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Druid",
+          "path": "druid",
+          "hidden": false,
+          "meta": {
+            "title": "数据监控",
+            "icon": "druid",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Server",
+          "path": "server",
+          "hidden": false,
+          "meta": {
+            "title": "服务监控",
+            "icon": "server",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Cache",
+          "path": "cache",
+          "hidden": false,
+          "meta": {
+            "title": "缓存监控",
+            "icon": "redis",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "CacheList",
+          "path": "cacheList",
+          "hidden": false,
+          "meta": {
+            "title": "缓存列表",
+            "icon": "redis-list",
+            "noCache": false,
+            "link": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tool",
+      "path": "/tool",
+      "hidden": false,
+      "redirect": "noRedirect",
+      "component": {
+        "__name": "index",
+        "__hmrId": "051739fd",
+        "__scopeId": "data-v-051739fd",
+        "__file": "/Users/wuchi/Projects/RuoYi-Vue3/src/layout/index.vue"
+      },
+      "alwaysShow": true,
+      "meta": {
+        "title": "系统工具",
+        "icon": "tool",
+        "noCache": false,
+        "link": null
+      },
+      "children": [
+        {
+          "name": "Build",
+          "path": "build",
+          "hidden": false,
+          "meta": {
+            "title": "表单构建",
+            "icon": "build",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Gen",
+          "path": "gen",
+          "hidden": false,
+          "meta": {
+            "title": "代码生成",
+            "icon": "code",
+            "noCache": false,
+            "link": null
+          }
+        },
+        {
+          "name": "Swagger",
+          "path": "swagger",
+          "hidden": false,
+          "meta": {
+            "title": "系统接口",
+            "icon": "swagger",
+            "noCache": false,
+            "link": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Http://ruoyi.vip",
+      "path": "http://ruoyi.vip",
+      "hidden": false,
+      "component": {
+        "__name": "index",
+        "__hmrId": "051739fd",
+        "__scopeId": "data-v-051739fd",
+        "__file": "/Users/wuchi/Projects/RuoYi-Vue3/src/layout/index.vue"
+      },
+      "meta": {
+        "title": "若依官网",
+        "icon": "guide",
+        "noCache": false,
+        "link": "http://ruoyi.vip"
+      }
+    }
+  ]
+)
+const showLogo = ref(true)
+const sideTheme = ref('theme-dark')
+const theme = ref()
+const isCollapse = ref()
+
+const activeMenu = computed(() => {
+  const { meta, path } = route;
+  // if set path, the sidebar will highlight the path you set
+  if (meta.activeMenu) {
+    return meta.activeMenu;
+  }
+  return path;
+})
+
+</script>
