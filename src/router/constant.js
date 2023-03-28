@@ -19,7 +19,11 @@ export default [
   },
   {
     path: '/about',
-    name: 'about',
-    component: () => import('views/About.vue'),
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: 'about',
+      component: () => import('views/About.vue'),
+    }]
   },
 ]

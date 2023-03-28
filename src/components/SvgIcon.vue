@@ -18,6 +18,6 @@ const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 
 <template>
   <svg class="inline w-4 h-4 fill-current align-baseline" aria-hidden="true">
-    <use :href="symbolId" :fill="color" />
+    <use :href="symbolId" :fill="color"/>
   </svg>
 </template>

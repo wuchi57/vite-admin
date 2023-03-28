@@ -24,8 +24,8 @@
 </template>
 
 <script setup>
-import Logo from './TheSidebarLogo.vue'
-import SidebarItem from './TheSidebarItem.vue'
+import Logo from './SidebarLogo.vue'
+import SidebarItem from './SidebarItem.vue'
 import variables from '@/assets/styles/variables.module.scss'
 
 const route = useRoute();

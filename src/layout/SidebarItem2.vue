@@ -35,9 +35,9 @@
 
 <script setup>
 import { isExternal } from '@/utils/validate'
-import AppLink from './TheSidebarLink.vue'
+import AppLink from './SidebarLink.vue'
 import { getNormalPath } from '@/utils/ruoyi'
-import SidebarItem from './TheSidebarItem.vue'
+import SidebarItem from './SidebarItem.vue'
 
 const props = defineProps({
   // route object

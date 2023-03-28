@@ -1,5 +1,5 @@
 <script setup>
-import SidebarMenu from './TheSidebarMenu.vue'</script>
+import SidebarMenu from './SidebarMenu.vue'</script>
 <template>
   <div class="h-full select-none">
     <div class="bdb logo h-[50px]">Logo</div>
