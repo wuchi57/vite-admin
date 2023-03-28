@@ -6,9 +6,9 @@ import Navbar from './TheNavbar.vue'</script>
 <template>
   <div class="w-full h-full relative">
     <Sidebar class="fixed w-sidebar h-full"/>
-    <div class="relative h-full  ml-[theme(width.sidebar)]">
+    <el-scrollbar class="h-full  ml-[theme(width.sidebar)]">
       <Navbar class="relative h-navbar shadow-navbar"/>
       <AppMain class="relative min-h-[calc(100%_-_theme(height.navbar))] overflow-hidden p-6"/>
-    </div>
+    </el-scrollbar>
   </div>
 </template>
