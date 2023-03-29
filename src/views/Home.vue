@@ -1,7 +1,6 @@
 <script setup>
 import ElementIcon from 'components/ElementIcon.vue'</script>
 
-
 <template>
   <div class="flex flex-col gap-4">
     <router-link to="/about/index" class="text-2xl font-medium">To About 前往关于页面</router-link>

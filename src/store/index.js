@@ -1,5 +1,5 @@
-import { createPinia } from 'pinia'
-import { createPersistedState } from 'pinia-plugin-persistedstate'
+import {createPinia} from 'pinia'
+import {createPersistedState} from 'pinia-plugin-persistedstate'
 
 const pinia = createPinia()
 
@@ -11,4 +11,5 @@ pinia.use(
 export default pinia
 
 export { useCounterStore } from './counter.js'
-export { useUserStore } from './user.js'
+export {useUserStore} from './user.js'
+export {useSettingStore} from './setting.js'

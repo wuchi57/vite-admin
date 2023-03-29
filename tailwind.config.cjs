@@ -16,7 +16,6 @@ module.exports = {
         navbar: '0 1px 4px rgba(0,21,41,.08)'
       },
       colors: {
-        pr: '#2389f2',
         menuText: '#bfcbd9',
         menuActiveText: '#409EFF',
         subMenuActiveText: '#f4f4f5', //https://github.com/ElemeFE/element/issues/12951

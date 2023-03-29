@@ -1,6 +1,11 @@
 <script setup>
 import SvgIcon from 'components/SvgIcon.vue'
-import { Apple, Search } from '@element-plus/icons-vue'</script>
+import { Apple, Search } from '@element-plus/icons-vue'
+
+console.log('hosfd')
+
+</script>
+
 
 <template>
   <div class="flex flex-col gap-4">
@@ -9,7 +14,6 @@ import { Apple, Search } from '@element-plus/icons-vue'</script>
       <span>Hello</span>
       <SvgIcon name="lock"/>
       <SvgIcon name="user"/>
-      <SvgIcon name="vue"/>
       <span>Hello你好👋</span>
     </div>
     <div>

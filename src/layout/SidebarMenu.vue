@@ -1,7 +1,10 @@
 <script setup>
-import { Document, Location, Menu as IconMenu, Setting, } from '@element-plus/icons-vue'
+import {Document, Location, Menu as IconMenu, Setting,} from '@element-plus/icons-vue'
+import {useSettingStore} from "@/store/index.js";
+import {computed} from "vue";
 
-const isCollapse = ref(false)
+const settingStore = useSettingStore()
+const isCollapse = computed(() => settingStore.sidebarCollapse)
 
 const handleOpen = (key, keyPath) => {
   console.log('handleOpen: ')
@@ -14,14 +17,11 @@ const handleClose = (key, keyPath) => {
 </script>
 
 <template>
-  <el-radio-group v-model="isCollapse" class="w-full flex justify-center my-4">
-    <el-radio-button :label="false">expand</el-radio-button>
-    <el-radio-button :label="true">collapse</el-radio-button>
-  </el-radio-group>
   <el-menu
-    default-active="2"
-    class="el-menu-vertical-demo"
-    :collapse="isCollapse"
+      default-active="2"
+      :collapse="isCollapse"
+      :collapse-transition="true"
+      class="w-sidebar"
   >
     <el-sub-menu index="1">
       <template #title>
