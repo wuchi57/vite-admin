@@ -1,6 +1,6 @@
 <script setup>
 import SidebarMenu from './SidebarMenu.vue'
-import { useSettingStore } from "@/store/index.js";
+import { useSettingStore } from '@/store/index.js'
 
 const settingStore = useSettingStore()
 
